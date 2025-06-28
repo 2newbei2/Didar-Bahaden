@@ -454,6 +454,11 @@ body {
 
 /* Extra small screens */
 @media (max-width: 480px) {
+    .navigation a {
+        font-size: 0.9rem; /* Make font smaller */
+        padding: 8px; /* Reduce padding for a more compact header */
+    }
+
     .hero-content .sliced-effect {
         font-size: 2.2rem;
     }
@@ -465,6 +470,13 @@ body {
     .cta-button {
         padding: 10px 25px;
         font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 426px) {
+    .navigation a {
+        font-size: 0.7rem; /* Make font smaller */
+        padding: 6.2px; /* Reduce padding for a more compact header */
     }
 }
 
@@ -519,6 +531,15 @@ body {
         gap: 3rem;
         padding: 4rem 5%;
         text-align: center;
+    }
+
+    .contact-details {
+        gap: 1.5rem; /* Reduce gap between stacked items */
+    }
+
+    .contact-item {
+        min-width: 100%; /* Allow item to take full width */
+        padding: 1.5rem; /* Reduce padding on mobile */
     }
 
     .about-image {
@@ -583,6 +604,7 @@ body {
     color: var(--clr-accent);
     text-decoration: none;
     font-size: 1rem;
+    word-break: break-all; /* Prevents long text like emails from overflowing */
     transition: text-shadow 0.3s ease;
 }
 
