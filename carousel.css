@@ -1,0 +1,180 @@
+/* Projects Section Styling */
+.projects-section {
+    width: 100%;
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    overflow: hidden; /* Prevents horizontal scrollbar from carousel */
+}
+
+.projects-section h2 {
+    font-size: 2.5rem;
+    color: var(--clr-text, #fff);
+    text-align: center;
+    margin: 0;
+    font-family: var(--font-primary, 'Inter', sans-serif);
+    font-weight: 600;
+}
+
+
+/* Carousel Styling */
+.carousel {
+    --items: 6;
+    --carousel-duration: 40s;
+    --carousel-width: min(90vw, 1200px);
+    --carousel-item-width: 280px;
+    --carousel-item-height: 440px; /* Adjusted height */
+    --carousel-item-gap: 2rem;
+
+    position: relative;
+    width: var(--carousel-width);
+    height: var(--carousel-item-height);
+    overflow: clip;
+    font-family: var(--font-primary, "Inter", sans-serif);
+}
+
+.carousel[mask] {
+    /* fade out on sides */
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 10% 90%,
+        transparent
+    );
+}
+
+.carousel[reverse] > article {
+    animation-direction: reverse;
+}
+
+/* hover pauses animation */
+.carousel:hover > article {
+    animation-play-state: paused;
+}
+
+.carousel > article {
+    position: absolute;
+    top: 0;
+    left: calc(100% + var(--carousel-item-gap));
+    width: var(--carousel-item-width);
+    height: var(--carousel-item-height);
+    display: grid;
+    grid-template-rows: 200px auto 1fr auto;
+    gap: 0.25rem;
+    border: 1px solid rgba(255 255 255 / 0.15);
+    padding-block-end: 1rem;
+    border-radius: 10px;
+    background: rgba(255 255 255 / 0.05);
+    box-sizing: border-box;
+    color: var(--clr-text, white);
+
+    /* animation */
+    will-change: transform;
+    animation-name: marquee;
+    animation-duration: var(--carousel-duration);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-delay: calc(
+        var(--carousel-duration) / var(--items) * 1 * var(--i) * -1
+    );
+}
+
+/* --- CAROUSEL ITEM MANAGEMENT --- */
+/* IMPORTANT: If you change the number of project items, update the --items variable below */
+/* and add/remove nth-child rules to match the new count. */
+.carousel { --items: 6; }
+
+.carousel > article:nth-child(1) { --i: 0; }
+.carousel > article:nth-child(2) { --i: 1; }
+.carousel > article:nth-child(3) { --i: 2; }
+.carousel > article:nth-child(4) { --i: 3; }
+.carousel > article:nth-child(5) { --i: 4; }
+.carousel > article:nth-child(6) { --i: 5; }
+
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.carousel > article > *:not(img) {
+    padding: 0 1rem;
+}
+
+.carousel > article h3 {
+    font-size: 1.2rem;
+    font-weight: 600; /* Increased weight for better readability */
+    padding-block: 0.75rem 0.25rem;
+    margin: 0;
+    color: var(--clr-text, #fff);
+    font-family: var(--font-primary, "Inter", sans-serif);
+}
+
+.carousel > article p {
+    margin: 0;
+}
+
+.carousel > article a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 0.8rem;
+    border: 1px solid var(--clr-accent);
+    color: var(--clr-text);
+    border-radius: 50px; /* Pill shape */
+    padding: 0.5rem 1.5rem;
+    place-self: center; /* Center the button horizontally */
+    margin-top: 0.5rem; /* Add a little space above the button */
+    transition: all 0.3s ease;
+}
+
+.carousel > article a:hover,
+.carousel > article a:focus-visible {
+    background-color: var(--clr-accent);
+    color: var(--clr-dark);
+    transform: scale(1.05); /* Add a subtle pop effect */
+    outline: none;
+}
+
+@keyframes marquee {
+    100% {
+        transform: translateX(
+            calc(
+                (var(--items) * (var(--carousel-item-width) + var(--carousel-item-gap))) *
+                    -1
+            )
+        );
+    }
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    /* When motion is reduced, transform the carousel into a horizontally scrollable container */
+    .carousel {
+        display: flex;
+        overflow-x: auto; /* Enable horizontal scrolling */
+        overflow-y: hidden;
+        gap: var(--carousel-item-gap);
+        scroll-snap-type: x mandatory; /* Makes scrolling snap to items */
+        mask-image: none; /* Remove the fade-out effect */
+
+        /* Hide scrollbar for a cleaner look */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    .carousel::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, and Opera */
+    }
+
+    .carousel > article {
+        animation: none; /* Stop the marquee animation */
+        position: static; /* Let items flow naturally in the flex container */
+        flex-shrink: 0; /* Prevent items from shrinking */
+        scroll-snap-align: center; /* Snap items to the center of the viewport */
+    }
+}

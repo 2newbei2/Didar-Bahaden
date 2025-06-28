@@ -1,0 +1,714 @@
+/* Global Box-Sizing for consistent layout */
+* {
+    box-sizing: border-box;
+}
+
+/* --- THEME & LAYOUT VARIABLES --- */
+:root {
+    --clr-text: #FFFFFF;
+    --clr-text-secondary: #ccc;
+    --clr-accent: #00FFFF;
+    --clr-dark: #000000;
+    --clr-bg-gradient-start: #1B2735;
+    --clr-bg-gradient-end: #090A0F;
+    --clr-bg-header: #16161680; /* 50% transparent */
+    --clr-bg-footer: #161616;
+    --clr-animation: #5bc0eb;
+    --font-primary: 'Inter', sans-serif;
+}
+
+/* --- BASE STYLES --- */
+body {
+    background: radial-gradient(ellipse at bottom, var(--clr-bg-gradient-start) 0%, var(--clr-bg-gradient-end) 100%);
+    color: var(--clr-text);
+    font-family: var(--font-primary);
+    margin: 0;
+    scroll-behavior: smooth; /* Added for smooth navigation scrolling */
+    overflow-x: hidden; /* Prevents horizontal scroll from overlapping elements */
+}
+
+/* --- UTILITY CLASSES --- */
+.accent-text {
+    color: var(--clr-accent);
+}
+
+/* --- HERO CONTAINER --- */
+.hero-section {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 0 5%;
+    box-sizing: border-box;
+}
+
+.hero-container {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    height: 100%; /* Increased height to reduce bottom gap and add top space */
+    
+}
+
+/* --- HEADER & NAVIGATION --- */
+.header-wrapper {
+    position: fixed; /* Changed to fixed */
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 20; /* Ensure wrapper is on top */
+}
+
+.header {
+    width: 95%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 30px;
+    box-sizing: border-box;
+    background-color: var(--clr-bg-header);
+    border-top: 1px solid rgba(70, 70, 70, 0.6);
+    border-bottom: 1px solid var(--clr-accent);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+    color: var(--clr-text);
+    border-radius: 40px;
+}
+
+.navigation a {
+    color: var(--clr-text);
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+    position: relative;
+    padding-bottom: 5px; /* Space for the underline */
+}
+
+.navigation a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Corrected typo: translateX instead of translatex */
+    background-color: var(--clr-accent);
+    transition: width 0.3s ease-in-out;
+}
+
+.navigation a:hover::after {
+    width: 100%;
+}
+
+.navigation a:hover {
+    color: var(--clr-accent);
+}
+
+/* --- MAIN CONTENT (BROKEN GRID ELEMENTS) --- */
+.hero-content {
+    position: relative; /* Changed to relative */
+    top: 20%; /* Adjusted top position to center the text better with new font size */
+    left: 0;
+    width: 55%;
+    z-index: 10;
+}
+
+.hero-content .sliced-effect {
+    font-family: var(--font-primary);
+    font-size: 4.5rem; /* Reduced default font size for better fit on large screens */
+    font-weight: 700; /* Bolder weight for impact */
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -2px; /* Negative spacing for a tighter, modern look */
+    text-transform: uppercase;
+    white-space: nowrap; /* Crucial: Prevents text from wrapping to multiple lines */
+}
+
+/* --- Sliced Text Effect --- */
+.sliced-effect {
+  display: grid;
+}
+
+.sliced-effect > div {
+  grid-area: 1/1/-1/-1;
+}
+
+.sliced-effect .top {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 48%, 0% 58%);
+}
+
+.sliced-effect .bottom {
+  clip-path: polygon(0% 60%, 100% 50%, 100% 100%, 0% 100%);
+  color: transparent;
+  background: -webkit-linear-gradient(177deg, var(--clr-dark) 53%, var(--clr-text) 65%);
+  background: linear-gradient(177deg, var(--clr-dark) 53%, var(--clr-text) 65%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  transform: translateX(-0.02em);
+}
+
+.hero-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 30px 0;
+}
+
+.cta-button {    
+    background-color: var(--clr-accent);
+    color: var(--clr-dark);
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    padding: 15px 35px;    
+    display: inline-block;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--clr-text);
+}
+
+/* --- New Animation Styles --- */
+.animation-example {
+    --animation-color: var(--clr-animation); /* Use global animation color */
+    position: absolute;
+    top: 25%; /* Start 25% from the top */
+    right: 0; /* Positioned to the right side */
+    transform: none; /* Removed vertical centering */
+    height: 75%; /* Occupy the remaining 75% of the height */
+    width: 45%; /* Occupies roughly half the hero section width */
+    max-width: 600px; /* Max width to prevent it from getting too large */
+    pointer-events: none; /* Allows clicks to pass through to elements behind */
+    z-index: 0; /* Ensure it's behind other content */
+}
+
+.animation-example > .item {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 50%;
+    width: 50%;
+    transform: translateX(-50%);
+    transform-origin: 50% 100%;
+}
+
+.animation-example > .item:nth-child(2) {
+    transform: translateX(-50%) rotate(90deg);
+}
+
+.animation-example > .item:nth-child(3) {
+    transform: translateX(-50%) rotate(180deg);
+}
+
+.animation-example > .item:nth-child(4) {
+    transform: translateX(-50%) rotate(270deg);
+}
+
+.animation-example > .item > .line {
+    height: 100%;
+    width: calc(50% + 1px);
+    border-right: 2px dashed var(--animation-color);
+}
+
+.animation-example > .item > .dot {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translateX(-50%) translateY(-50%);
+    height: 100%;
+    width: 100%;
+    animation: move-dot1 5.5s linear infinite;
+}
+
+.animation-example > .item > .dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    height: 5%;
+    width: 5%;
+    background: var(--clr-dark);
+    border: 2px solid var(--clr-animation);
+    border-radius: 50%;
+}
+
+.animation-example > .item > .circle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 20%;
+    width: 20%;
+    border-radius: 50%;
+    background: var(--clr-animation);
+}
+
+.animation-example > .item.-type2 {
+    top: 0;
+    left: 0;
+    transform: none;
+    transform-origin: 100% 100%;
+}
+
+.animation-example > .item.-type2:nth-child(5) {
+    transform: scaleX(-1);
+}
+
+.animation-example > .item.-type2:nth-child(6) {
+    transform: scaleX(-1) scaleY(-1);
+}
+
+.animation-example > .item.-type2:nth-child(7) {
+    transform: scaleY(-1);
+}
+
+.animation-example > .item.-type2 > .line {
+    position: absolute;
+    top: 30%;
+    left: calc(30% - 1px);
+    width: 70%;
+    height: 40%;
+    border-right: none;
+    border-left: 2px dashed var(--clr-animation);
+    border-bottom: 2px dashed var(--clr-animation);
+}
+
+.animation-example > .item.-type2 > .dot {
+    top: 30%;
+    left: 30%;
+    animation: move-dot2 4s linear infinite;
+}
+
+.animation-example > .item.-type2 > .circle {
+    top: 30%;
+    left: 30%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.animation-example > .item:nth-of-type(1) > .dot { animation-delay: 0s; }
+.animation-example > .item:nth-of-type(7) > .dot { animation-delay: .5s; }
+.animation-example > .item:nth-of-type(2) > .dot { animation-delay: 1s; }
+.animation-example > .item:nth-of-type(6) > .dot { animation-delay: 1.5s; }
+.animation-example > .item:nth-of-type(3) > .dot { animation-delay: 2s; }
+.animation-example > .item:nth-of-type(5) > .dot { animation-delay: 2.5s; }
+.animation-example > .item:nth-of-type(4) > .dot { animation-delay: 3s; }
+.animation-example > .item:nth-of-type(8) > .dot { animation-delay: 3.5s; }
+
+.animation-example > .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    height: 50%;
+    width: 50%;
+}
+
+.animation-example > .center > .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    border-radius: 50%;
+}
+
+.animation-example > .center > .circle:nth-child(1) {
+    height: 100%;
+    width: 100%;
+    background: var(--clr-dark);
+    box-shadow: 0 0 3vmin rgba(0, 0, 0, .1);
+}
+
+.animation-example > .center > .circle:nth-child(2) {
+    height: 80%;
+    width: 80%;
+    border: 2px solid var(--clr-animation);
+}
+
+.animation-example > .center > .circle:nth-child(3) {
+    height: 50%;
+    width: 50%;
+    background: var(--clr-animation);
+}
+
+@keyframes move-dot1 {
+    0% { transform: translateX(-50%) translateY(-50%); }
+    20% { transform: translateX(-50%) translateY(30%); }
+    100% { transform: translateX(-50%) translateY(30%); }
+}
+
+@keyframes move-dot2 {
+    0% { transform: translateX(-50%) translateY(-50%); }
+    15% { transform: translateX(-50%) translateY(-10%); }
+    30% { transform: translateX(-10%) translateY(-10%); }
+    100% { transform: translateX(-10%) translateY(-10%); }
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Medium screens (e.g., tablets) */
+@media (max-width: 992px) {
+    .hero-content .sliced-effect { /* Adjusted for medium screens */
+        font-size: 3.5rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        max-width: 350px;
+    }
+
+    .cta-button {
+        font-size: 0.9rem;
+        padding: 12px 30px;
+    }
+    
+    .navigation a {
+        font-size: 0.85rem;
+        margin-left: 20px;
+    }
+}
+
+/* Small screens (e.g., mobile phones) */
+/* THIS SECTION HAS BEEN CORRECTED */
+@media (max-width: 768px) {
+    .hero-section {
+        height: auto;
+        padding-bottom: 300px;
+    }
+
+    .hero-container {
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        text-align: center;
+
+    }
+
+    /* Make the wrapper flow in the document instead of being absolute */
+    .header-wrapper {
+        position: -webkit-sticky; /* For Safari compatibility */
+        position: sticky;
+        top: 0;
+        z-index: 20; /* Ensure it stays on top of other content */
+        background: transparent; /* Allow content to scroll underneath */
+        margin-bottom: 40px;
+        width: 100%; /* Ensure wrapper takes full width */
+        padding: 10px 0; /* Add vertical padding */
+    }
+
+    /* Adjust the header inside the wrapper for mobile */
+    .header {
+        flex-direction: column; /* Stack logo and nav */
+        width: 95%;
+        margin: 0 auto; /* Center the header */
+        padding: 20px 30px; /* Adjust padding for vertical layout */
+        background-color: var(--clr-bg-header); /* 50% transparent, from desktop */
+        -webkit-backdrop-filter: blur(10px); /* Frosted glass effect for Safari */
+        backdrop-filter: blur(10px); /* Frosted glass effect */
+        border-top: 1px solid rgba(70, 70, 70, 0.6); /* from desktop */
+        border-bottom: 1px solid var(--clr-accent); /* from desktop */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55); /* from desktop */
+        border-radius: 40px; /* from desktop */
+    }
+
+    .navigation a {
+        margin: 8px 0; /* Adjust margin for vertical stack */
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .hero-content {
+        position: static;
+        width: 100%;
+        order: 2; /* Display text after the image */
+        margin-top: 0; /* Replaced with gap on parent */
+    }
+
+    .hero-content .sliced-effect {
+        font-size: 2.8rem;
+    }
+
+    .hero-content p {
+        max-width: 100%;
+        margin: 20px 0;
+    }
+
+    .animation-example {
+        position: static;
+        width: 50vw; /* Further reduced size for mobile */
+        height: 50vw; /* Maintain aspect ratio */
+        max-width: 250px; /* Adjusted max-width to control size on larger mobile screens */
+        max-height: 250px; /* Adjusted max-height to control size */
+        order: 1; /* Display image before the text */
+        margin-bottom: 26rem; /* Added margin to create space below the animation */
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .hero-content .sliced-effect {
+        font-size: 2.2rem;
+    }
+
+    .hero-content p {
+        font-size: 0.85rem;
+    }
+
+    .cta-button {
+        padding: 10px 25px;
+        font-size: 0.85rem;
+    }
+}
+
+/* --- ABOUT SECTION --- */
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22rem; /* Increased gap for more visual separation */
+    padding: 6rem 5%;
+    flex-direction: row-reverse; /* This will swap the image and text */
+    max-width: 1100px;
+    margin: 0 auto; /* Center the section */
+    overflow: hidden;
+}
+
+.about-content {
+    flex-basis: 55%;
+    max-width: 600px;
+}
+
+.about-content h2 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    color: var(--clr-text);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.about-content p {
+    color: var(--clr-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.about-image {
+    flex-basis: 30%;
+    max-width: 400px;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 50%; /* Makes the image circular */
+    border: 3px solid var(--clr-accent);
+    box-shadow: 0 0 25px var(--clr-accent)4d; /* 30% opacity */
+}
+
+/* Responsive adjustments for About Section */
+@media (max-width: 768px) {
+    .about-section {
+        flex-direction: column-reverse; /* Stack image on top of text */
+        gap: 3rem;
+        padding: 4rem 5%;
+        text-align: center;
+    }
+
+    .about-image {
+        max-width: 250px; /* Smaller image for mobile */
+    }
+}
+
+
+/* --- CONTACT SECTION --- */
+.contact-section {
+    padding: 4rem 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.contact-section h2 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    color: var(--clr-text);
+    font-weight: 600;
+    margin: 0;
+}
+
+.contact-intro {
+    color: var(--clr-text-secondary);
+    max-width: 500px;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap; /* For responsiveness */
+}
+
+.contact-item {
+    background: rgba(22, 22, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 10px;
+    min-width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--clr-accent)1a; /* 10% opacity */
+}
+
+.contact-item h3 {
+    color: var(--clr-text);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.contact-item a {
+    color: var(--clr-accent);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: text-shadow 0.3s ease;
+}
+
+.contact-item a:hover,
+.contact-item a:focus-visible {
+    text-shadow: 0 0 8px var(--clr-accent)b3; /* 70% opacity */
+    outline: none; /* Remove default outline in favor of our custom shadow */
+}
+
+/* --- FOOTER STYLES --- */
+footer {
+    background-color: var(--clr-bg-footer);
+    color: var(--clr-text);
+    text-align: center;
+    padding: 25px 0; /* Vertical padding */
+    font-size: 0.9rem;
+    font-family: var(--font-primary);
+    border-top: 1px solid rgba(70, 70, 70, 0.6); /* Subtle top border */
+    box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.55); /* Subtle top shadow, matching header style */
+    margin-top: 60px; /* Provide some space from the content above */
+    position: relative; /* For pseudo-element positioning */
+    overflow: hidden; /* To clip the pseudo-element if it extends beyond bounds */
+}
+
+footer p {
+    margin: 0; /* Remove default paragraph margin */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Smooth transition for hover effects */
+    position: relative; /* Ensure text is above ::before */
+    z-index: 1; /* Ensure text is above ::before */
+}
+
+footer:hover p {
+    color: var(--clr-accent); /* Change text color to accent on hover */
+    text-shadow: 0 0 10px var(--clr-accent)cc; /* 80% opacity */
+}
+
+/* Subtle animated background element for the footer */
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--clr-accent)14, transparent 50%, var(--clr-accent)14); /* 8% opacity */
+    background-size: 200% 100%; /* Make gradient wider than element */
+    background-position: 100% 0; /* Start off-screen to the right */
+    opacity: 0;
+    transition: background-position 0.8s ease-out, opacity 0.5s ease;
+    z-index: 0; /* Behind the text */
+}
+
+footer:hover::before {
+    opacity: 1;
+    background-position: 0 0; /* Slide gradient into view */
+}
+
+/* --- Parallax Star Background --- */
+/* The star divs (#stars, #stars2, #stars3) must be added to the HTML body for this to work */
+
+#stars, #stars2, #stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 1774px 1788px #FFF, 1502px 175px #FFF, 1285px 353px #FFF, 1374px 1936px #FFF, 1532px 1199px #FFF, 621px 1993px #FFF, 1383px 1491px #FFF, 1243px 1970px #FFF, 735px 128px #FFF, 1265px 1349px #FFF;
+  animation: animStar 50s linear infinite;
+}
+
+#stars:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 1774px 1788px #FFF, 1502px 175px #FFF, 1285px 353px #FFF, 1374px 1936px #FFF, 1532px 1199px #FFF, 621px 1993px #FFF, 1383px 1491px #FFF, 1243px 1970px #FFF, 735px 128px #FFF, 1265px 1349px #FFF;
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 111px 1148px #FFF, 1928px 1291px #FFF, 954px 112px #FFF, 1925px 569px #FFF, 124px 1124px #FFF, 1872px 1739px #FFF, 1406px 1485px #FFF, 55px 1135px #FFF, 1368px 1544px #FFF, 1008px 1845px #FFF;
+  animation: animStar 100s linear infinite;
+}
+
+#stars2:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 111px 1148px #FFF, 1928px 1291px #FFF, 954px 112px #FFF, 1925px 569px #FFF, 124px 1124px #FFF, 1872px 1739px #FFF, 1406px 1485px #FFF, 55px 1135px #FFF, 1368px 1544px #FFF, 1008px 1845px #FFF;
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 285px 128px #FFF, 38px 1396px #FFF, 1389px 383px #FFF, 1422px 1721px #FFF, 128px 1845px #FFF, 1297px 117px #FFF, 1146px 129px #FFF, 747px 1515px #FFF, 193px 461px #FFF, 1553px 1332px #FFF;
+  animation: animStar 150s linear infinite;
+}
+
+#stars3:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 285px 128px #FFF, 38px 1396px #FFF, 1389px 383px #FFF, 1422px 1721px #FFF, 128px 1845px #FFF, 1297px 117px #FFF, 1146px 129px #FFF, 747px 1515px #FFF, 193px 461px #FFF, 1553px 1332px #FFF;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
