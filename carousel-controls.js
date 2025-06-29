@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const gap = 24;
     
     let isTransitioning = false;
-    let currentActiveIndex = 0;
 
     // --- 1. CLONE ITEMS FOR INFINITE LOOP ---
     // We clone items to prepend and append to create a seamless loop effect.
@@ -45,9 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Remove active class from all and add to the center one
         allItems.forEach(item => item.classList.remove('is-active'));
         activeItem.classList.add('is-active');
-        
-        // Track the active index relative to the original items
-        currentActiveIndex = (activeIndexInAll - itemsToCloneCount + originalItems.length) % originalItems.length;
     };
 
     // --- 3. INITIAL SETUP ---

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Dictionary - Portfolio Project</title>
+    <meta name="description" content="A modern dictionary tool to look up word definitions, phonetics, and audio pronunciation.">
+    <link rel="icon" href="DDD.jpg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base styles for background -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Tool-specific styles (to be created) -->
+    <link rel="stylesheet" href="dictionary.css">
+</head>
+<body>
+    <!-- Star Background Effect -->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+
+    <main class="dictionary-page-container">
+        <a href="index.html" class="back-button">&larr; Back to Portfolio</a>
+        
+        <div class="dictionary-app-container">
+            <header>
+                <h1>Modern Dictionary</h1>
+            </header>
+
+            <form class="search-form" id="search-form">
+                <input type="text" id="search-input" placeholder="Search for a word..." autocomplete="off">
+                <button type="submit" class="search-button">Search</button>
+            </form>
+            
+            <div class="instructions" id="instructions">
+                <p>Type a word in the search bar and press Enter. Get definitions, phonetics, and audio pronunciation.</p>
+            </div>
+
+            <div class="loading-spinner" id="loading-spinner"></div>
+            <div class="error-message" id="error-message"></div>
+            <div class="results-container" id="results-container">
+                <!-- Search results will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <footer id="portfolio-footer">
+        <p>Powered by <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer" class="footer-link">DictionaryAPI.dev</a></p>
+    </footer>
+
+    <!-- Dictionary script (to be created) -->
+    <script src="dictionary.js" defer></script>
+
+</body>
+</html>

@@ -3,17 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Didar Bahaden - Portfolio</title>
-    <meta name="description" content="The portfolio of Didar Bahaden, an aspiring developer with a passion for AI and web development.">
-    <link rel="icon" href="favicon.ico" sizes="any">
-    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <title>Didar Bahaden - Web Developer Portfolio</title>
+    <meta name="description" content="The portfolio of Didar Bahaden, a web developer who uses AI as a tool to build creative front-end projects.">
+    
+    <!-- SEO Best Practices -->
+    <link rel="canonical" href="https://didar-bahaden.vercel.app/">
+
+    <!-- Favicon -->
+    <link rel="icon" href="DDD.jpg" type="image/jpeg">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Open Graph / Facebook & LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://didar-bahaden.vercel.app/">
+    <meta property="og:title" content="Didar Bahaden - Web Developer Portfolio">
+    <meta property="og:description" content="The portfolio of Didar Bahaden, a web developer who uses AI as a tool to build creative front-end projects.">
+    <meta property="og:image" content="https://www.YOUR-DOMAIN.com/DDD.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://didar-bahaden.vercel.app/">
+    <meta property="twitter:title" content="Didar Bahaden - Web Developer Portfolio">
+    <meta property="twitter:description" content="The portfolio of Didar Bahaden, a web developer who uses AI as a tool to build creative front-end projects.">
+    <meta property="twitter:image" content="https://didar-bahaden.vercel.app/DDD.jpg">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Didar Bahaden",
+      "url": "https://didar-bahaden.vercel.app/",
+      "image": "https://didar-bahaden.vercel.app/DDD.jpg",
+      "jobTitle": "Web Developer",
+      "description": "A web developer who uses AI as a tool to build creative front-end projects and learn by doing."
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="carousel.css">
 </head>
 <body>
     <!-- Star Background Effect (divs are directly in body, positioned fixed by CSS) -->
@@ -26,6 +56,7 @@
             <nav class="navigation">
                     <a href="#home">HOME</a>
                     <a href="#about">ABOUT</a>
+                    <a href="#skills">SKILLS</a>
                     <a href="#projects">PROJECTS</a>
                     <a href="#contact">CONTACT</a>
                 </nav>
@@ -38,10 +69,11 @@
             
             <div class="hero-content"> <!-- Main content for text and CTA -->
                 <h1 class="sliced-effect">
-                    <div class="top">A Coder's <span class="accent-text">Vibe</span></div>
-	        <div class="bottom" aria-hidden="true">A Coder's <span class="accent-text">Vibe</span></div>
+                    <div class="top">Didar <span class="accent-text">Bahaden</span></div>
+	        <div class="bottom" aria-hidden="true">Didar <span class="accent-text">Bahaden</span></div>
 		         </h1>
-		        <p>Welcome to my portfolio. I'm new to the world of vibe coding, where I use AI as a creative partner to build projects and learn along the way. This is a space to explore my journey from the ground up.</p>
+                <p class="hero-tagline">Web Developer</p>
+		        <p>Welcome to my portfolio. I use AI as a creative partner to build front-end projects and learn by doing.</p>
                 <a href="#projects" class="cta-button">VIEW MY PROJECTS</a>
             </div>
 
@@ -60,13 +92,23 @@
         <div class="about-content">
             <h2>About <span class="accent-text">Me</span></h2>
             <p>
-                I'm Didar Bahaden, and I'm at the beginning of my journey as a vibe coder. For me, this means focusing on intuition and practical results, using AI as a powerful collaborator. Instead of getting stuck on theory, I believe in learning by doing—building things, seeing what works, and growing with each project.
+                I'm Didar Bahaden, a web developer with a passion for learning by doing. I take a practical, hands-on approach, using modern tools like AI as a creative partner to build projects and accelerate my growth.
             </p>
             <p>
-                This portfolio is a real-time log of my progress. It's where I'm documenting everything, from my first steps to more complex projects. It's a space for practice, growth, and showcasing the exciting synergy between human creativity and artificial intelligence. Thanks for following along with my experiment.
+                This portfolio is a living document of my journey. It's where I'm practicing my skills, documenting my progress, and showcasing how I use AI as a tool to bring my front-end development ideas to life.
             </p>
         </div>
         <div class="about-image"><img src="DDD.jpg" alt="Didar Bahaden"></div>
+    </section>
+
+    <section id="skills" class="skills-section">
+        <h2>Core <span class="accent-text">Technologies</span></h2>
+        <div class="skills-grid">
+            <div class="skill-badge">HTML</div>
+            <div class="skill-badge">CSS</div>
+            <div class="skill-badge">JavaScript</div>
+            <!-- Add more skills here as you learn them! -->
+        </div>
     </section>
 
     <section id="projects" class="projects-section">
@@ -75,38 +117,38 @@
             <button class="carousel-control prev" aria-label="Previous Project">&lt;&lt;</button>
             <div class="carousel">
                 <article>
-                    <img src="https://placehold.co/280x200/020618/00FFFF?text=Project+1" alt="Project 1">
-                    <h3>URL Shortener</h3>
+                    <img src="https://placehold.co/280x200/020618/00FFFF?text=Project+1" alt="URL Shortener Project">
+                    <h3><a href="shortener.html">URL Shortener</a></h3>
                     <p>A simple and modern tool to shorten your long links, with advanced options.</p>
-                    <a href="shortener.html">Launch Tool</a>
+                    <span class="project-cta-text">Launch Tool</span>
                 </article>
 
                 <article>
-                    <img src="https://placehold.co/280x200/020618/FFFFFF?text=Project+2" alt="Project 2">
-                    <h3>Project Coming Soon</h3>
-                    <p>This space is reserved for a future project. Check back later for updates!</p>
-                    <a href="#">Read more</a>
+                    <img src="https://placehold.co/280x200/020618/00FFFF?text=Dictionary" alt="Modern Dictionary Project">
+                    <h3><a href="dictionary.html">Modern Dictionary</a></h3>
+                    <p>Look up definitions, phonetics, and audio pronunciations for any word.</p>
+                    <span class="project-cta-text">Launch Tool</span>
                 </article>
 
                 <article>
                     <img src="https://placehold.co/280x200/020618/FFFFFF?text=Project+3" alt="Project 3">
-                    <h3>Project Coming Soon</h3>
+                    <h3><a href="#" class="disabled-link">Project Coming Soon</a></h3>
                     <p>This space is reserved for a future project. Check back later for updates!</p>
-                    <a href="#">Read more</a>
+                    <span class="project-cta-text">Read more</span>
                 </article>
 
                 <article>
                     <img src="https://placehold.co/280x200/020618/FFFFFF?text=Project+4" alt="Project 4">
-                    <h3>Project Coming Soon</h3>
+                    <h3><a href="#" class="disabled-link">Project Coming Soon</a></h3>
                     <p>This space is reserved for a future project. Check back later for updates!</p>
-                    <a href="#">Read more</a>
+                    <span class="project-cta-text">Read more</span>
                 </article>
 
                 <article>
                     <img src="https://placehold.co/280x200/020618/FFFFFF?text=Project+5" alt="Project 5">
-                    <h3>Project Coming Soon</h3>
+                    <h3><a href="#" class="disabled-link">Project Coming Soon</a></h3>
                     <p>This space is reserved for a future project. Check back later for updates!</p>
-                    <a href="#">Read more</a>
+                    <span class="project-cta-text">Read more</span>
                 </article>
 
             </div>
@@ -120,11 +162,11 @@
         <div class="contact-details">
             <div class="contact-item">
                 <h3>Email Address</h3>
-                <a href="mailto:didar.bhd@gmail.com">didar.bhd@gmail.com</a>
+                <a href="mailto:didar.bhd@gmail.com" aria-label="Email Didar Bahaden at didar.bhd@gmail.com">didar.bhd@gmail.com</a>
             </div>
             <div class="contact-item">
                 <h3>Phone</h3>
-                <a href="tel:+9647817844751">+964 781 784 4751</a>
+                <a href="tel:+9647817844751" aria-label="Call Didar Bahaden at +964 781 784 4751">+964 781 784 4751</a>
             </div>
         </div>
     </section>

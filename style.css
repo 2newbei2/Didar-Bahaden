@@ -112,7 +112,7 @@ body {
     position: relative; /* Changed to relative */
     top: 20%; /* Adjusted top position to center the text better with new font size */
     left: 0;
-    width: 55%;
+    width: 58%; /* Increased width to reduce gap */
     z-index: 10;
 }
 
@@ -150,6 +150,14 @@ body {
   transform: translateX(-0.02em);
 }
 
+.hero-tagline {
+    font-size: 1.2rem;
+    color: var(--clr-text-secondary);
+    margin-top: -1.5rem; /* Pull it closer to the h1 */
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
 .hero-content p {
     font-size: 1rem;
     line-height: 1.6;
@@ -182,7 +190,7 @@ body {
 
     position: absolute;
     top: 50%;
-    right: 5%;
+    right: 8%; /* Moved closer to the center to reduce gap */
     transform: translateY(-50%);
     width: 300px;
     height: 200px;
@@ -388,20 +396,21 @@ body {
 
 /* --- ABOUT SECTION --- */
 .about-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5rem; /* Reduced gap for better proximity on large screens */
-    padding: 4rem 5%; /* Reduced top/bottom padding to close the gap */
-    flex-direction: row-reverse; /* This will swap the image and text */
+    position: relative; /* Use positioning similar to hero section */
+    padding: 6rem 5%;
     max-width: 1100px;
     margin: 0 auto; /* Center the section */
     overflow: hidden;
+    min-height: 500px; /* Ensure there's space for positioned elements */
 }
 
 .about-content {
-    flex-basis: 55%;
+    width: 55%;
     max-width: 600px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .about-content h2 {
@@ -419,8 +428,12 @@ body {
 }
 
 .about-image {
-    flex-basis: 30%;
+    width: 30%;
     max-width: 400px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .about-image img {
@@ -433,10 +446,27 @@ body {
 /* Responsive adjustments for About Section */
 @media (max-width: 768px) {
     .about-section {
+        position: static; /* Revert to static positioning */
+        display: flex;
         flex-direction: column-reverse; /* Stack image on top of text */
-        gap: 3rem;
         padding: 4rem 5%;
         text-align: center;
+        min-height: 0;
+        gap: 3rem;
+    }
+
+    .about-content {
+        position: static;
+        width: 100%;
+        transform: none;
+    }
+
+    .about-image {
+        position: static;
+        width: 100%;
+        transform: none;
+        margin: 0 auto; /* Center the image container */
+        max-width: 250px; /* Smaller image for mobile */
     }
 
     .contact-details {
@@ -447,10 +477,180 @@ body {
         min-width: 100%; /* Allow item to take full width */
         padding: 1.5rem; /* Reduce padding on mobile */
     }
+}
 
-    .about-image {
-        max-width: 250px; /* Smaller image for mobile */
-    }
+/* --- SKILLS SECTION --- */
+.skills-section {
+    padding: 4rem 5%;
+    text-align: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.skills-section h2 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    color: var(--clr-text);
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
+
+.skills-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.skill-badge {
+    background: rgba(22, 22, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 4px solid var(--clr-accent);
+    color: var(--clr-text);
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: default;
+}
+
+.skill-badge:hover {
+    transform: translateY(-5px);
+    border-color: var(--clr-accent);
+    box-shadow: 0 8px 20px rgba(0, 255, 255, 0.15);
+}
+
+/* --- PROJECTS SECTION & CAROUSEL --- */
+.projects-section {
+    padding: 4rem 0; /* Add vertical padding, horizontal is handled by wrapper */
+    text-align: center;
+}
+
+.projects-section h2 {
+    font-family: var(--font-primary);
+    font-size: 2.5rem;
+    color: var(--clr-text);
+    font-weight: 600;
+    margin: 0 0 3rem 0;
+}
+
+.carousel-wrapper {
+    position: relative;
+    max-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel {
+    display: flex;
+    gap: 24px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding: 24px;
+    width: 100%;
+    max-width: 900px; /* Adjust as needed */
+}
+
+.carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.carousel article {
+    scroll-snap-align: center;
+    flex: 0 0 280px;
+    background: rgba(22, 22, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* For the clickable area */
+}
+
+/* The active (center) item in the carousel */
+.carousel article.is-active {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px #00ffff1a;
+    border-color: var(--clr-accent);
+}
+
+.carousel article img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.carousel article h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+/* This is the main link for the card */
+.carousel article h3 a {
+    color: var(--clr-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* The "stretched link" pseudo-element */
+.carousel article h3 a::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1; /* Place it above other content in the card */
+}
+
+/* Hover/focus styles for the entire card */
+.carousel article:hover h3 a,
+.carousel article h3 a:focus-visible {
+    color: var(--clr-accent);
+    outline: none;
+}
+
+.carousel article:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 25px #00ffff2a;
+}
+
+.carousel article p {
+    color: var(--clr-text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+/* The "Launch Tool" text */
+.project-cta-text {
+    color: var(--clr-accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 2; /* Ensure it's above the stretched link */
+}
+
+/* Styles for disabled project cards */
+.disabled-link {
+    pointer-events: none; /* Make the link unclickable */
+    cursor: default;
+}
+
+.carousel article:has(.disabled-link) {
+    opacity: 0.6;
+    filter: grayscale(50%);
+}
+
+.carousel article:has(.disabled-link):hover {
+    transform: none; /* Disable hover effect */
+    box-shadow: none;
 }
 
 
@@ -568,6 +768,45 @@ footer:hover::before {
     background-position: 0 0; /* Slide gradient into view */
 }
 
+/* Carousel Controls */
+.carousel-control {
+    background: rgba(22, 22, 22, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--clr-text);
+    font-size: 1.5rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.carousel-control:hover {
+    background-color: var(--clr-accent);
+    color: var(--clr-dark);
+}
+
+.carousel-control.prev {
+    left: 2%;
+}
+
+.carousel-control.next {
+    right: 2%;
+}
+
+/* Specific style for links within project page footers */
+footer a.footer-link {
+    color: var(--clr-accent);
+    text-decoration: none;
+}
+
 /* --- Parallax Star Background --- */
 /* The star divs (#stars, #stars2, #stars3) must be added to the HTML body for this to work */
 
@@ -639,4 +878,13 @@ footer:hover::before {
   to {
     transform: translateY(-2000px);
   }
+}
+
+@media (max-width: 1100px) {
+    .carousel-control {
+        display: none; /* Hide controls on smaller screens, rely on swipe */
+    }
+    .carousel {
+        max-width: 100%;
+    }
 }
