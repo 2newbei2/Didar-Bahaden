@@ -1,0 +1,339 @@
+/* --- Shortener Page & Component Variables --- */
+.shortener-page-container {
+    /* Scoped CSS variables for the shortener component */
+    /* These can be easily tweaked without affecting the rest of the site. */
+    --shortener-card-bg: rgba(22, 22, 22, 0.5); /* Dark, semi-transparent bg */
+    --shortener-border: rgba(255, 255, 255, 0.15);
+    --shortener-input-bg: rgba(0, 0, 0, 0.3);
+    --shortener-text-primary: var(--clr-text, #FFFFFF);
+    --shortener-text-secondary: var(--clr-text-secondary, #ccc);
+    --shortener-text-placeholder: #6b7280;
+    --shortener-accent: var(--clr-accent, #00FFFF);
+    --shortener-accent-hover: var(--clr-text, #FFFFFF); /* Use white for hover to match site's CTA */
+    --shortener-accent-text: var(--clr-dark, #000000);
+    --shortener-success: #4ade80; /* green-400 */
+    --shortener-success-button: #16a34a; /* green-600 */
+    --shortener-success-button-hover: #15803d; /* green-700 */
+    --shortener-error: #f87171; /* red-400 */
+    --shortener-error-bg: rgba(76, 29, 29, 0.5); /* red-900 with 50% opacity */
+    --shortener-error-border: #b91c1c; /* red-700 */
+    --shortener-notice-bg: rgba(55, 65, 81, 0.2);
+    --shortener-notice-border: rgba(255, 255, 255, 0.1);
+    --shortener-notice-text: #d1d5db;
+
+    /* Layout styles for the page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem 5%;
+    font-family: var(--font-primary, 'Inter', sans-serif);
+}
+
+/* --- Main Container & Card --- */
+.shortener-container {
+    width: 100%;
+    max-width: 48rem; /* 768px */
+}
+
+.shortener-card {
+    background-color: var(--shortener-card-bg);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--shortener-border);
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    padding: 2.5rem;
+}
+
+/* --- Header --- */
+.shortener-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.shortener-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--shortener-text-primary);
+    letter-spacing: -0.025em;
+}
+
+.shortener-header p {
+    color: var(--shortener-text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* --- Form Elements --- */
+.shorten-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-main-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.form-input, .form-input-advanced {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--shortener-input-bg);
+    border: 1px solid var(--shortener-border);
+    border-radius: 0.5rem;
+    color: var(--shortener-text-primary);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+    font-size: 1rem;
+}
+.form-input-advanced {
+     padding: 0.5rem 1rem;
+}
+
+.form-input::placeholder, .form-input-advanced::placeholder {
+    color: var(--shortener-text-placeholder);
+}
+
+.form-input:focus, .form-input-advanced:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--shortener-accent);
+    border-color: var(--shortener-accent);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--shortener-accent);
+    color: var(--shortener-accent-text);
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-button:hover {
+    background-color: var(--shortener-accent-hover);
+}
+
+.submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* --- Advanced Options --- */
+.advanced-options-toggle {
+    text-align: center;
+}
+
+#toggle-options {
+    background: none;
+    border: none;
+    color: var(--shortener-text-secondary);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: color 0.3s;
+    font-family: inherit;
+}
+#toggle-options:hover {
+    color: var(--shortener-text-primary);
+}
+
+#chevron-icon {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    vertical-align: middle; /* Aligns icon better with text */
+}
+#chevron-icon.rotate-180 {
+    transform: rotate(180deg);
+}
+
+.advanced-options {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, padding-top 0.5s ease-in-out;
+    opacity: 0;
+    border-top: 1px solid var(--shortener-border);
+}
+.advanced-options.open {
+    max-height: 500px;
+    opacity: 1;
+    padding-top: 1.5rem;
+}
+
+.advanced-options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.private-checkbox-container {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    background-color: rgba(55, 65, 81, 0.3);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+#private {
+    height: 1rem;
+    width: 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    accent-color: var(--shortener-accent);
+}
+
+#private + label {
+    font-size: 0.875rem;
+    color: var(--shortener-text-primary);
+    cursor: pointer;
+}
+
+/* --- Result, Error & Notice Display --- */
+.security-notice {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: var(--shortener-notice-bg);
+    border: 1px solid var(--shortener-notice-border);
+    border-radius: 0.5rem;
+    text-align: left;
+}
+
+.security-notice p {
+    font-size: 0.875rem;
+    line-height: 1.4;
+    color: var(--shortener-notice-text);
+}
+
+.security-notice strong {
+    color: var(--shortener-text-primary);
+    font-weight: 600;
+}
+
+.result-area {
+    margin-top: 2rem;
+    background-color: var(--shortener-input-bg);
+    border: 1px solid var(--shortener-accent);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+#result-text {
+    color: var(--shortener-success);
+    font-weight: 500;
+    font-size: 1.125rem;
+    word-break: break-all;
+    text-align: center;
+}
+
+.copy-button {
+    width: 100%;
+    padding: 0.5rem 1.25rem;
+    background-color: var(--shortener-success-button);
+    color: var(--shortener-text-primary);
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.copy-button:hover {
+    background-color: var(--shortener-success-button-hover);
+}
+
+.error-area {
+    margin-top: 1.5rem;
+    background-color: var(--shortener-error-bg);
+    border: 1px solid var(--shortener-error-border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+#error-text {
+    color: var(--shortener-error);
+    font-weight: 500;
+}
+
+/* --- Section Controls --- */
+.back-button {
+    background: none;
+    border: 1px solid var(--shortener-border);
+    color: var(--shortener-text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    align-self: flex-start; /* Aligns to the left of the container */
+    margin-bottom: 1rem; /* Space between button and card */
+}
+
+.back-button:hover {
+    background-color: var(--shortener-accent);
+    color: var(--shortener-accent-text);
+    border-color: var(--shortener-accent);
+}
+
+/* --- Utility & Animation Classes --- */
+.hidden {
+    display: none !important;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.spinner {
+    width: 1.25rem; /* 20px */
+    height: 1.25rem;
+    border: 4px solid rgba(0, 0, 0, 0.3);
+    border-top-color: var(--shortener-accent-text);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+    cursor: pointer;
+}
+
+/* --- Responsive Design (Media Queries) --- */
+@media (min-width: 640px) { /* sm breakpoint */
+    .form-main-group {
+        flex-direction: row;
+    }
+    .submit-button {
+        width: auto;
+    }
+    .result-area {
+        flex-direction: row;
+    }
+    .copy-button {
+        width: auto;
+    }
+    .advanced-options-grid {
+         grid-template-columns: repeat(2, 1fr);
+    }
+}

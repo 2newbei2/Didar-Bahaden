@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortify - URL Shortener</title>
+    <meta name="description" content="A modern URL shortener tool.">
+    <link rel="icon" href="favicon.ico" sizes="any">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Base styles for background and fonts -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Tool-specific styles -->
+    <link rel="stylesheet" href="shortener.css">
+</head>
+<body>
+    <!-- Star Background Effect -->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+
+    <main class="shortener-page-container">
+        <a href="index.html" class="back-button">&larr; Back to Portfolio</a>
+        <div class="shortener-container">
+            <div class="shortener-card">
+                
+                <!-- Header -->
+                <header class="shortener-header">
+                    <h1>Shortify</h1>
+                    <p>The simplest way to shorten and share your links.</p>
+                </header>
+
+                <!-- Form -->
+                <form id="shorten-form" class="shorten-form">
+                    <!-- Main URL Input -->
+                    <div class="form-main-group">
+                        <input type="url" id="long-url" name="url" placeholder="https://enter-your-long-url-here.com" required class="form-input">
+                        <button type="submit" id="submit-button" class="submit-button">
+                            <svg id="link-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+                            <span id="button-text">Shorten</span>
+                            <div id="spinner" class="spinner hidden"></div>
+                        </button>
+                    </div>
+
+                    <!-- Advanced Options Toggle -->
+                    <div class="advanced-options-toggle">
+                        <button type="button" id="toggle-options">
+                            Advanced Options
+                            <svg id="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg>
+                        </button>
+                    </div>
+
+                    <!-- Advanced Options Section -->
+                    <div id="advanced-options" class="advanced-options">
+                        <div class="advanced-options-grid">
+                            <input type="text" id="custom-name" name="custom" placeholder="Custom alias (optional)" class="form-input-advanced">
+                            <input type="text" id="password" name="password" placeholder="Password (optional, max 10)" maxlength="10" class="form-input-advanced">
+                            <input type="number" id="uses" name="uses" placeholder="Max uses (optional)" min="1" class="form-input-advanced">
+                            <input type="date" id="expire" name="expire" title="Expiration date" class="form-input-advanced">
+                            <div class="private-checkbox-container">
+                                 <input type="checkbox" id="private" name="private">
+                                 <label for="private">Make this link private</label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Security Notice -->
+                <div class="security-notice">
+                    <p><strong>Security Note:</strong> This is a public URL shortener. For your safety, please do not use it for links that contain sensitive or private information.</p>
+                </div>
+
+                <!-- Result/Error Display -->
+                <div id="result-area" class="result-area hidden">
+                    <p id="result-text"></p>
+                    <button id="copy-button" class="copy-button">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+                        <span>Copy</span>
+                    </button>
+                </div>
+
+                <div id="error-area" class="error-area hidden">
+                    <p id="error-text"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="portfolio-footer">
+        <p>Powered by <a href="https://ulvis.net/" target="_blank" rel="noopener noreferrer" style="color: var(--clr-accent); text-decoration: none;">ulvis.net API</a></p>
+    </footer>
+
+    <!-- URL Shortener Scripts -->
+    <script src="shortener-ui.js" defer></script>
+    <script src="shortener-api.js" defer></script>
+    <script src="shortener-main.js" defer></script>
+
+</body>
+</html>

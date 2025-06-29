@@ -1,180 +1,150 @@
 /* Projects Section Styling */
 .projects-section {
     width: 100%;
-    padding: 4rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
-    overflow: hidden; /* Prevents horizontal scrollbar from carousel */
 }
 
-.projects-section h2 {
-    font-size: 2.5rem;
-    color: var(--clr-text, #fff);
-    text-align: center;
-    margin: 0;
-    font-family: var(--font-primary, 'Inter', sans-serif);
-    font-weight: 600;
+/* Wrapper for carousel and controls */
+.carousel-wrapper {
+    position: relative;
+    /* Calculate width for 3 cards (280px) and 2 gaps (1.5rem = 24px) */
+    max-width: calc((280px * 3) + (1.5rem * 2));
+    margin: 0 auto;
+    overflow: hidden; /* This is the key change to hide off-screen cards */
 }
-
 
 /* Carousel Styling */
 .carousel {
-    --items: 6;
-    --carousel-duration: 40s;
-    --carousel-width: min(90vw, 1200px);
-    --carousel-item-width: 280px;
-    --carousel-item-height: 440px; /* Adjusted height */
-    --carousel-item-gap: 2rem;
-
-    position: relative;
-    width: var(--carousel-width);
-    height: var(--carousel-item-height);
-    overflow: clip;
-    font-family: var(--font-primary, "Inter", sans-serif);
+    display: flex;
+    overflow-x: auto; /* Changed to auto to allow snapping */
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory; /* Snap to items */
+    gap: 1.5rem; /* 24px */
+    padding: 1rem 0;
+    /* Hide scrollbar */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
 }
-
-.carousel[mask] {
-    /* fade out on sides */
-    mask-image: linear-gradient(
-        to right,
-        transparent,
-        black 10% 90%,
-        transparent
-    );
-}
-
-.carousel[reverse] > article {
-    animation-direction: reverse;
-}
-
-/* hover pauses animation */
-.carousel:hover > article {
-    animation-play-state: paused;
+.carousel::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
 }
 
 .carousel > article {
-    position: absolute;
-    top: 0;
-    left: calc(100% + var(--carousel-item-gap));
-    width: var(--carousel-item-width);
-    height: var(--carousel-item-height);
-    display: grid;
-    grid-template-rows: 200px auto 1fr auto;
-    gap: 0.25rem;
-    border: 1px solid rgba(255 255 255 / 0.15);
-    padding-block-end: 1rem;
-    border-radius: 10px;
-    background: rgba(255 255 255 / 0.05);
-    box-sizing: border-box;
-    color: var(--clr-text, white);
-
-    /* animation */
-    will-change: transform;
-    animation-name: marquee;
-    animation-duration: var(--carousel-duration);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-delay: calc(
-        var(--carousel-duration) / var(--items) * 1 * var(--i) * -1
-    );
+    flex: 0 0 280px;
+    scroll-snap-align: center; /* Snap this item to the center */
+    background-color: var(--clr-bg-header);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.4s, box-shadow 0.4s, opacity 0.4s ease-in-out;
+    opacity: 0.5; /* Default faded-out state for side cards */
+    transform: scale(0.9); /* Default smaller state for side cards */
 }
 
-/* --- CAROUSEL ITEM MANAGEMENT --- */
-/* IMPORTANT: If you change the number of project items, update the --items variable below */
-/* and add/remove nth-child rules to match the new count. */
-.carousel { --items: 6; }
-
-.carousel > article:nth-child(1) { --i: 0; }
-.carousel > article:nth-child(2) { --i: 1; }
-.carousel > article:nth-child(3) { --i: 2; }
-.carousel > article:nth-child(4) { --i: 3; }
-.carousel > article:nth-child(5) { --i: 4; }
-.carousel > article:nth-child(6) { --i: 5; }
+/* This class will be toggled by JS for the center item */
+.carousel article.is-active {
+    opacity: 1; /* Fully visible */
+    transform: scale(1); /* Full size */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
 
 .carousel img {
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
-    border-radius: 10px 10px 0 0;
-}
-
-.carousel > article > *:not(img) {
-    padding: 0 1rem;
 }
 
 .carousel > article h3 {
-    font-size: 1.2rem;
-    font-weight: 600; /* Increased weight for better readability */
-    padding-block: 0.75rem 0.25rem;
-    margin: 0;
-    color: var(--clr-text, #fff);
-    font-family: var(--font-primary, "Inter", sans-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--clr-text-white);
+    margin-bottom: 0.5rem;
 }
 
 .carousel > article p {
-    margin: 0;
+    font-size: 0.875rem;
+    color: var(--clr-text-secondary);
+    margin-bottom: 1rem;
+    min-height: 56px;
 }
 
 .carousel > article a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--clr-accent);
+    color: var(--clr-text-white);
+    border-radius: 0.5rem;
     text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    font-size: 0.8rem;
-    border: 1px solid var(--clr-accent);
-    color: var(--clr-text);
-    border-radius: 50px; /* Pill shape */
-    padding: 0.5rem 1.5rem;
-    place-self: center; /* Center the button horizontally */
-    margin-top: 0.5rem; /* Add a little space above the button */
-    transition: all 0.3s ease;
+    font-weight: 500;
+    transition: background-color 0.3s;
 }
 
 .carousel > article a:hover,
 .carousel > article a:focus-visible {
     background-color: var(--clr-accent);
     color: var(--clr-dark);
-    transform: scale(1.05); /* Add a subtle pop effect */
-    outline: none;
 }
 
-@keyframes marquee {
-    100% {
-        transform: translateX(
-            calc(
-                (var(--items) * (var(--carousel-item-width) + var(--carousel-item-gap))) *
-                    -1
-            )
-        );
+/* --- Carousel Controls --- */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(31, 41, 55, 0.8);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.carousel-control.prev {
+    left: -22px;
+}
+
+.carousel-control.next {
+    right: -22px;
+}
+
+.carousel-control:hover,
+.carousel-control:focus-visible {
+    background-color: rgba(55, 65, 81, 1);
+}
+
+/* --- Responsive Carousel Adjustments --- */
+@media (max-width: 992px) {
+    .carousel-wrapper {
+        /* On tablets, we can still fit 3 cards, but let's make them a bit smaller */
+        max-width: calc((250px * 3) + (1rem * 2));
     }
-}
-
-/* Accessibility: Respect user's motion preferences */
-@media (prefers-reduced-motion: reduce) {
-    /* When motion is reduced, transform the carousel into a horizontally scrollable container */
     .carousel {
-        display: flex;
-        overflow-x: auto; /* Enable horizontal scrolling */
-        overflow-y: hidden;
-        gap: var(--carousel-item-gap);
-        scroll-snap-type: x mandatory; /* Makes scrolling snap to items */
-        mask-image: none; /* Remove the fade-out effect */
-
-        /* Hide scrollbar for a cleaner look */
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        gap: 1rem;
     }
-
-    .carousel::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, and Opera */
-    }
-
     .carousel > article {
-        animation: none; /* Stop the marquee animation */
-        position: static; /* Let items flow naturally in the flex container */
-        flex-shrink: 0; /* Prevent items from shrinking */
-        scroll-snap-align: center; /* Snap items to the center of the viewport */
+        flex: 0 0 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .carousel-wrapper {
+        /* On mobile, the wrapper takes most of the screen width. */
+        max-width: 90vw;
+    }
+    .carousel > article {
+        /* Make cards smaller and responsive to the viewport width */
+        flex: 0 0 75vw;
     }
 }
