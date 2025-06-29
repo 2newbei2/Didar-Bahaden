@@ -370,12 +370,19 @@ body {
 /* Extra small screens */
 @media (max-width: 480px) {
     .navigation a {
-        font-size: 0.7rem; /* Make font smaller */
-        padding: 6.2px; /* Reduce padding for a more compact header */
+        font-size: 0.9rem; /* Make font smaller */
+        padding: 8px; /* Reduce padding for a more compact header */
     }
 
     .hero-content .sliced-effect {
         font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 426px) {
+    .navigation a {
+        font-size: 0.7rem; /* Make font smaller */
+        padding: 6.2px; /* Reduce padding for a more compact header */
     }
 }
 
